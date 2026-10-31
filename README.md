@@ -4,6 +4,14 @@ This repository extends the Assignment 1 student support agent. It keeps the Str
 
 All records and accounts are fictional. This project is a classroom demonstration, not a production student information system.
 
+## Demo Video
+
+The Assignment 2 application demonstration is available below:
+
+[Watch Assignment 2 Demo Video](./Prarthi_ass2_video_demo.mp4)
+
+The demonstration covers student authentication, role-based access control, AI student support, memory functionality, email-change approval workflow, email-change history, and login history.
+
 > **Keep the runtime handbook:** `rag/sample_handbook.md` is read by the application to build policy retrieval. It is an app data file, not duplicate documentation. Keep it even if you remove the other Markdown guides.
 
 ## 1. What you need
@@ -75,9 +83,9 @@ The login page lists the demo accounts. The current fictional credentials are:
 
 | Username | Role | Password |
 |---|---|---|
-| `asha` | Student (`STU1001`) | `Asha-Demo-2026!` |
-| `kabir` | Student (`STU1002`) | `Kabir-Demo-2026!` |
-| `mira` | Student (`STU1003`) | `Mira-Demo-2026!` |
+| `anaya` | Student (`STU1001`) | `Anaya-Demo-2026!` |
+| `rohan` | Student (`STU1002`) | `Rohan-Demo-2026!` |
+| `kiara` | Student (`STU1003`) | `Kiara-Demo-2026!` |
 | `approver` | Approver | `Approve-Demo-2026!` |
 
 These source-defined credentials are intentionally convenient for a local assignment. Password verification uses PBKDF2-HMAC, but the accounts, fixed demo salt, and local session flow are **not production authentication**. Never reuse these passwords. A production system should use institutional SSO and managed credentials.
@@ -89,7 +97,7 @@ The seed records are fictional. Asha (`STU1001`) has a partially paid fee balanc
 
 ### A. Existing student support
 
-Sign in as Asha and try:
+Sign in as Anaya and try:
 
 1. “What is my fee status?”
 2. “What is my scholarship status?”
@@ -123,6 +131,8 @@ To show cross-session memory, save “I prefer concise explanations,” start a 
 Every private-data tool checks the authenticated principal in Python, including direct tool invocation. The graph also replaces model-supplied student IDs with the signed-in student's ID. A prompt asking for another student's data may therefore be scoped to the current student before reaching the tool; use the direct-tool test below to demonstrate an authorization denial reliably.
 
 The **Security audit (evaluator)** expander shows persistent security events written to the app's configured SQLite database. Ordinary chat messages are not audit events. Tests use temporary databases for isolation, so their audit entries do not appear in the running app's audit panel.
+
+The application also maintains a login history that records the username, role, student ID, and login timestamp. Students can view their own login history, while the approver can view login records across students.
 
 For a persistent cross-student denial in the configured database, run this while the app's environment/dependencies are active:
 
@@ -166,7 +176,7 @@ If commands cannot run because packages are missing, confirm that the venv is ac
 
 ### Verification status for this workspace
 
-Python syntax compilation and a standard-library SQLite smoke check passed for self-ownership, cross-student denial, approval, rejection without mutation, and persistent audit writes. The full pytest suite and comparison runner were not run successfully in the supplied environment: its virtual environment points to a removed Python 3.12 installation, while the available system Python lacks pytest and the app packages. No full-suite pass rate, model accuracy, measured latency comparison, or token total is claimed here.
+The full pytest suite was executed successfully using `python -m pytest -q`, with 12 tests passing. One non-blocking LangChain deprecation warning was displayed. The security and application workflows were tested as part of the assignment verification.
 
 ## 7. Request flow and architecture
 
@@ -207,7 +217,7 @@ security/auth.py               Fictional demo login and role principals
 security/authorization.py      Trusted principal context and ownership policy
 security/approvals.py          Durable email-change approval workflow
 security/redaction.py          Credential-pattern redaction
-database/db.py                 SQLite schema and connection helper
+database/db.py                 SQLite schema, login history and connection helper
 database/seed.py               Fictional student records
 memory/policies.py             Long-term-memory allow/deny rules
 memory/store.py                SQLite memory write/read/delete functions
