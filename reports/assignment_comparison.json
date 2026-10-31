@@ -1,0 +1,77 @@
+{
+  "environment": "local Python; deterministic SQLite fixture; no LLM call",
+  "trials": 2,
+  "normal_task_success": {
+    "count": 2,
+    "total": 2,
+    "percent": 100.0
+  },
+  "unauthorized_access_blocked": {
+    "count": 1,
+    "total": 1,
+    "percent": 100.0
+  },
+  "unsafe_action_gated": {
+    "count": 1,
+    "total": 1,
+    "percent": 100
+  },
+  "latency_ms": {
+    "mean": 47.40243327493469,
+    "method": "local tool invocation wall-clock; includes SQLite and policy check"
+  },
+  "token_usage": {
+    "input": null,
+    "output": null,
+    "reason": "No model invoked"
+  },
+  "audit_evidence": {
+    "events": 8,
+    "decisions": [
+      {
+        "decision": "allowed",
+        "approval_status": null,
+        "execution_status": "not_executed"
+      },
+      {
+        "decision": "allowed",
+        "approval_status": null,
+        "execution_status": "succeeded"
+      },
+      {
+        "decision": "allowed",
+        "approval_status": null,
+        "execution_status": "not_executed"
+      },
+      {
+        "decision": "allowed",
+        "approval_status": null,
+        "execution_status": "succeeded"
+      },
+      {
+        "decision": "denied",
+        "approval_status": null,
+        "execution_status": "not_executed"
+      },
+      {
+        "decision": "allowed",
+        "approval_status": null,
+        "execution_status": "not_executed"
+      },
+      {
+        "decision": "allowed",
+        "approval_status": "pending",
+        "execution_status": "not_executed"
+      },
+      {
+        "decision": "allowed",
+        "approval_status": "rejected",
+        "execution_status": "cancelled"
+      }
+    ]
+  },
+  "assignment_1": {
+    "status": "unavailable",
+    "reason": "No pristine A1 snapshot or reproducible A1 baseline is present in this workspace."
+  }
+}

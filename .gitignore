@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.sqlite3
+rag/index/
+reports/traces/*.jsonl
+student_support.sqlite3
+reports/traces/
